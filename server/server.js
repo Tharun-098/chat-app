@@ -58,8 +58,9 @@ app.get('/',(req,res)=>{
 })
 app.use('/user',userRoutes)
 app.use('/message',messageRoutes)
-
-server.listen(port,()=>{
-    console.log(`port is running on http://localhost:${port}`)
-})
+if(process.env.NODE_ENV!=='production'){
+    server.listen(port,()=>{
+        console.log(`port is running on http://localhost:${port}`)
+    })
+}
 

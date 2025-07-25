@@ -63,4 +63,4 @@ if(process.env.NODE_ENV!=='production'){
         console.log(`port is running on http://localhost:${port}`)
     })
 }
-
+export default server;

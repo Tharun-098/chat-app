@@ -73,7 +73,6 @@ return (
             ) : (
               <Sun onClick={toggleTheme} className="w-7 h-7 text-gray-600 hover:bg-gray-300 p-1 rounded-lg dark:text-gray-400 dark:hover:bg-gray-700" />
             )}
-              <Bell className="w-7 h-7 text-gray-600 hover:bg-gray-300 p-1 rounded-lg dark:text-gray-400 dark:hover:bg-gray-700" />
               <Settings onClick={()=>navigate('/settings')} className="w-7 h-7 text-gray-600 hover:bg-gray-300 p-1 rounded-lg dark:text-gray-400 dark:hover:bg-gray-700" />
           </div>
         </div>

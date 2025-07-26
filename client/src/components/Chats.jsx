@@ -132,7 +132,7 @@ useEffect(() => {
       <div ref={scrollEnd}></div>
 
       <div className='p-3 relative dark:bg-gray-950'>
-        <input onKeyDown={(e)=>e.key=="Enter"?handleSendMessage(e):null} type="text" placeholder='message' value={input} onChange={(e)=>setInput(e.target.value)} className='pl-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all duration-200 w-full outline-0 border border-gray-400 rounded-lg bg-gray-200 p-2'/>
+        <input onKeyDown={(e)=>e.key=="Enter"?handleSendMessage(e):null} type="text" placeholder='message' value={input} onChange={(e)=>setInput(e.target.value)} className='pl-10 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all duration-200 w-full outline-0 border border-gray-400 rounded-lg bg-gray-200 p-2'/>
         <Send   
           onClick={handleSendMessage}
         className='w-6 h-6 text-gray-600 absolute top-5.5 right-6'/>

@@ -11,9 +11,6 @@ import PrivateRoute from "./components/PrivateRoute";
 
 const App = () => {
   const { userr, login } = useContext(DataContext);
-
-  //if (loading) return <div>Loading...</div>;
-
   return (
     <Routes>
       <Route path="/" element={login ? <HomePage /> : <LoginRegister />}>

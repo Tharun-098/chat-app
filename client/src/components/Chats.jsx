@@ -1,9 +1,8 @@
-import React, { useEffect, useRef, useContext, useState } from "react";
+import  { useEffect, useRef, useContext, useState } from "react";
 import userIcon from "../assets/user-profile-icon-free-vector.jpg";
 import DataContext from "../context/DataContext";
-import { useNavigate, useParams } from "react-router-dom";
-import { ArrowLeft, Video, Image, Send } from "lucide-react";
-//import { Message } from '../assets/assets';
+import { useNavigate } from "react-router-dom";
+import { ArrowLeft,  Image, Send } from "lucide-react";
 import ChatContext from "../context/ChatContext";
 
 const Chats = () => {
@@ -11,7 +10,6 @@ const Chats = () => {
   const containerRef = useRef(null);
   const { setChat, userr, OnlineUsers } = useContext(DataContext);
   const {
-    setUnseenMessage,
     message,
     selectUser,
     setSelectUser,
@@ -60,22 +58,6 @@ const Chats = () => {
 
     reader.readAsDataURL(file);
   };
-  // const handleSendVideo = async (e) => {
-  //   const file = e.target.files[0];
-  //   if (!file || !file.type.startsWith("video/")) {
-  //     console.log("select an video file");
-  //     return;
-  //   }
-
-  //   const reader = new FileReader();
-
-  //   reader.onloadend = async () => {
-  //     await sendUserMessage({ video: reader.result });
-  //     e.target.value = "";
-  //   };
-
-  //   reader.readAsDataURL(file);
-  // };
 
   useEffect(() => {
     if (selectUser) {
@@ -146,14 +128,6 @@ const Chats = () => {
                 />
               )}
 
-              {/* Video Message */}
-              {/* {mess.video && (
-        <video controls className="max-w-40 md:max-w-100 rounded-md">
-          <source src={mess.video} type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
-      )} */}
-
               {/* Time */}
               <p className="dark:text-gray-300 text-sm">
                 {formatTimeAgo(mess.createdAt)}
@@ -187,10 +161,6 @@ const Chats = () => {
           className="hidden"
           onChange={handleSendImage}
         />
-        {/* <label htmlFor="video-upload">
-    <Video className="w-5 h-5 text-gray-600 absolute top-6 left-10 cursor-pointer" />
-  </label>
-  <input type="file" id="video-upload" accept="video/*" className="hidden" onChange={handleSendVideo}/> */}
       </div>
     </div>
   );

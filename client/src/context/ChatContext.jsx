@@ -6,6 +6,7 @@ const ChatContext = createContext({});
 export const ChatProvider = ({ children }) => {
   const [users, setUsers] = useState([]);
   const [message, setMessage] = useState([]);
+  const [lastMessage, setLastMessage] = useState({});
   const [selectUser, setSelectUser] = useState(undefined);
   const [unseenmessage, setUnseenMessage] = useState({});
 
@@ -35,6 +36,16 @@ export const ChatProvider = ({ children }) => {
       const { data } = await axios.get(`/message/${userId}`);
       if (data.success) {
         setMessage(data.messages);
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+  const getLastMessage = async () => {
+    try {
+      const { data } = await axios.get('/message/lastmessage');
+      if (data.success) {
+        setLastMessage(data.lastMessages);
       }
     } catch (error) {
       console.log(error.message);
@@ -87,17 +98,21 @@ export const ChatProvider = ({ children }) => {
     }
   }, [selectUser]);
 
-  useEffect(() => {
-    getUsers();
-  }, [OnlineUsers]);
   // Load users + last selected user on mount
   useEffect(() => {
     getUsers();
+    getLastMessage();
     const user = localStorage.getItem("selectuser");
     if (user) {
       setSelectUser(JSON.parse(user));
     }
-  }, [OnlineUsers]);
+    console.log(lastMessage);
+  }, [OnlineUsers,userr]);
+  
+useEffect(() => {
+  console.log("lastMessage updated:", lastMessage);
+}, [lastMessage]);
+
 
   return (
     <ChatContext.Provider
@@ -110,6 +125,7 @@ export const ChatProvider = ({ children }) => {
         setSelectUser,
         getUserMessage,
         sendUserMessage,
+        lastMessage
       }}
     >
       {children}

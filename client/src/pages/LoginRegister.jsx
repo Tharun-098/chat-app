@@ -1,6 +1,5 @@
-import { MessageCircle,Lock, Mail, User, EyeOff, Eye, MessageCircleCodeIcon } from "lucide-react";
+import { Lock, Mail, User, EyeOff, Eye, MessageCircleCodeIcon } from "lucide-react";
 import { useEffect,useContext, useState } from "react";
-import { FaGoogle, FaFacebook } from "react-icons/fa";
 import DataContext from "../context/DataContext";
 import { useNavigate } from "react-router-dom";
 const LoginRegister = () => {
@@ -23,7 +22,6 @@ const LoginRegister = () => {
   const handleLogin=async(e)=>{
     try{
       e.preventDefault()
-      //setLoading(true)
       const {data}=await axios.post(`/user/${state}`,{username:name,email,password})
       if(data.success){
       setUserr(data.user)
@@ -43,9 +41,6 @@ const LoginRegister = () => {
     }catch(error){
       console.log(error.message)
     }
-    //finally{
-      //setLoading(false)
-    //}
 }
   return (
     <div className="bg-indigo-100  min-h-screen flex items-center justify-center p-3 sm:p-0">
@@ -120,25 +115,7 @@ const LoginRegister = () => {
                 />
               </div>
             )}
-            {/* {state!='register'&& (
-              <div className="flex items-center justify-between my-2">
-                <label className="flex items-center">
-                  <input
-                    type="checkbox"
-                    className="rounded border-gray-300 text-blue-600 shadow-sm focus:ring-blue-500"
-                  />
-                  <span className="ml-2 text-sm  text-gray-600 ">
-                    Remember me
-                  </span>
-                </label>
-                <a
-                  href="/"
-                  className="text-sm text-blue-600 hover:text-blue-500  dark:text-blue-400 dark:hover:text-blue-300"
-                >
-                  Forgot password?
-                </a>
-              </div>
-            )} */}
+        
             <button
                 type="submit"
               className="w-full bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-semibold py-3 px-4 rounded-lg transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl"
@@ -146,26 +123,7 @@ const LoginRegister = () => {
               {state!='register' ? "Sign in" : "Sign up"}
             </button>
           </form>
-          {/* <div className="relative py-3">
-            <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-gray-300 " />
-            </div>
-            <div className="relative flex justify-center text-sm">
-              <span className="px-2 bg-white text-gray-500">
-                Or continue with
-              </span>
-            </div>
-          </div>
-          <div className="grid grid-cols-2 gap-3">
-            <button className="flex gap-2 items-center justify-center px-4 py-2 border border-gray-300  rounded-lg hover:bg-gray-50  transition-all duration-200">
-              <FaGoogle />
-              Google
-            </button>
-            <button className="flex gap-2 items-center justify-center px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-all duration-200">
-              <FaFacebook />
-              Facebook
-            </button>
-          </div> */}
+    
           <p className="py-3 text-center">
             {state==='register'?'Already have an account?':'create an account?'}
             <span

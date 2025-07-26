@@ -1,11 +1,10 @@
-import React, { useContext} from 'react';
+import { useContext} from 'react';
 import SideBar from '../components/SideBar';
 import { Outlet } from 'react-router-dom';
 import DataContext from '../context/DataContext';
 
 const HomePage = () => {
   const { chat,userr } = useContext(DataContext);
-
 
   return (
     <>

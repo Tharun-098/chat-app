@@ -8,11 +8,9 @@ import {
   FileText,
   Mail,
   User,
-  User2,
 } from "lucide-react";
 import userIcon from '../assets/user-profile-icon-free-vector.jpg'
-import React, { useContext, useRef, useState } from "react";
-import userImage from "../assets/userImage.webp";
+import { useContext, useRef, useState } from "react";
 import DataContext from "../context/DataContext";
 import { useNavigate } from "react-router-dom";
 
@@ -279,7 +277,5 @@ const updateProfile = async (userId) => {
     </div>
   );
 }
-
-
 
 export default UserInfo;

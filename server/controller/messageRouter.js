@@ -1,5 +1,6 @@
 import Message from "../model/messages.js";
 import User from "../model/user.js";
+import mongoose from "mongoose";
 import cloudinary from "cloudinary";
 import { io, userSocketMap } from "../server.js";
 export const getAllUsersExcept = async (req, res) => {
@@ -23,7 +24,27 @@ export const getAllUsersExcept = async (req, res) => {
     return res.json({ success: false, message: error.message });
   }
 };
-
+export const getLastMessage=async(req,res)=>{
+  try{
+    const ObjectId=mongoose.Types.ObjectId;
+    const userid=req.userId;
+    const users=await User.find({_id:{$ne:userid}}).select('-password');
+    console.log(users);
+    const lastMessages={}
+    const sendid=new ObjectId(userid);
+    const promises=users.map(async(user)=>{
+      const userIds=new ObjectId(user._id);
+      const message=await Message.findOne({$or:[{senderid:userIds,receiverid:sendid},{senderid:sendid,receiverid:userIds}]}).sort({createdAt:-1}).limit(1);
+      if(message){
+        lastMessages[user._id]=message;
+      }
+    })
+    await Promise.all(promises)
+    return res.json({ success: true, lastMessages});
+  }catch(error){
+    return res.json({ success: false, message: error.message });
+  }
+}
 export const selectUserMessages = async (req, res) => {
   try {
     const { id: selectId } = req.params;

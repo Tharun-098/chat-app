@@ -1,6 +1,5 @@
-import React, { useState,useEffect, useContext } from 'react'
-import { ArrowLeft, Bell, LogOut, Moon, Shield, Sun } from "lucide-react"
-import { notifications } from '../assets/assets'
+import  { useContext } from 'react'
+import { ArrowLeft, LogOut, Moon, Sun } from "lucide-react"
 import DataContext from '../context/DataContext';
 import { useNavigate } from 'react-router-dom';
 
@@ -53,12 +52,7 @@ const ToggleSwitch = ({ enabled, onChange, label, description }) => (
 const SettingPage = () => {
   const {setUserr,axios,setLogin,toggleTheme,dark,socket}=useContext(DataContext);
   const navigate=useNavigate()
-  const [notificationSettings, setNotificationSettings] = useState(
-    notifications.map(() => false) // create an array of toggles based on number of items
-  );
-const [readReceipts, setReadReceipts] = useState(false);
-const [lastSeen, setLastSeen] = useState(false);
- const logout=async()=>{
+  const logout=async()=>{
   try{
     const {data}=await axios.get('/user/logout')
     if(data.success){
@@ -77,14 +71,8 @@ const [lastSeen, setLastSeen] = useState(false);
   }
 }
 
-  const handleToggle = (index) => {
-    const updated = [...notificationSettings];
-    updated[index] = !updated[index];
-    setNotificationSettings(updated);
-  };
 
-  const [val, setVal] = useState("everyone");
-  const [vals, setVals] = useState("everyone");
+  
 
   return (
     <div className='bg-indigo-100 dark:bg-gray-950 min-h-screen pb-2'>
@@ -109,12 +97,7 @@ const [lastSeen, setLastSeen] = useState(false);
             <h1 className='font-semibold text-lg dark:text-white'>Appearance</h1>
           </div>
           <div className='p-6'>
-            {/* <ToggleSwitch
-              enabled={dark}
-              onChange={()=>setDark}
-              label="Dark Mode"
-              description="Switch between light and dark theme"
-            /> */}
+            
             <div className="flex items-center justify-between py-3">
     <div className="flex-1">
       <p className="font-medium text-gray-900 dark:text-white">Dark mode</p>
@@ -136,70 +119,6 @@ const [lastSeen, setLastSeen] = useState(false);
           </div>
         </div>
 
-        <div className='bg-white dark:bg-gray-900 my-8 rounded-xl border dark:border-gray-600 border-gray-300'>
-          <div className='flex gap-1 items-center border-b dark:border-gray-600 border-gray-300 p-6'>
-            <div className='p-2 bg-blue-100 dark:bg-blue-950 rounded-lg mr-3'>
-              <Bell className="h-5 w-5 text-blue-600" />
-            </div>
-            <h1 className='font-semibold text-lg dark:text-white'>Notification</h1>
-          </div>
-          <div className='p-6'>
-            {notifications.map((item, index) => (
-              <ToggleSwitch
-                key={index}
-                enabled={notificationSettings[index]}
-                onChange={() => handleToggle(index)}
-                label={item.head}
-                description={item.content}
-              />
-            ))}
-          </div>
-        </div>
-
-        <div className='bg-white dark:bg-gray-900 my-8 rounded-xl border border-gray-300 dark:border-gray-600'>
-          <div className='flex gap-1 items-center border-b border-gray-300 p-6 dark:border-gray-600'>
-            <div className='p-2 bg-green-100 dark:bg-green-950 rounded-lg mr-3'>
-              <Shield className="h-5 w-5 text-green-600" />
-            </div>
-            <h1 className='font-semibold text-lg dark:text-white'>Privacy</h1>
-          </div>
-          <div className='p-6'>
-            <ToggleSwitch
-              enabled={readReceipts}
-              onChange={setReadReceipts}
-              label="Read receipts"
-              description="Let others know when you've read their messages"
-            />
-            <ToggleSwitch
-              enabled={lastSeen}
-              onChange={setLastSeen}
-              label="Last seen"
-              description="Show when you were last online"
-            />
-            <SelectOption
-              value={val}
-              onChange={setVal}
-              options={[
-                { value: 'everyone', label: 'Everyone' },
-                { value: 'contacts', label: 'My Contacts' },
-                { value: 'nobody', label: 'Nobody' },
-              ]}
-              label="Profile photo"
-              description="Who can see your profile picture"
-            />
-            <SelectOption
-              value={vals}
-              onChange={setVals}
-              options={[
-                { value: 'everyone', label: 'Everyone' },
-                { value: 'contacts', label: 'My Contacts' },
-                { value: 'nobody', label: 'Nobody' },
-              ]}
-              label="Who can message you"
-              description="Control who can send you messages"
-            />
-          </div>
-        </div>
 
           <div className='bg-white dark:bg-gray-900 my-8 rounded-xl border border-gray-300 dark:border-gray-600'>
           <div className='flex gap-1 items-center border-b border-gray-300 p-6 dark:border-gray-600'>

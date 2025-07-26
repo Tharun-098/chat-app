@@ -13,8 +13,6 @@ export const DataProvider = ({ children }) => {
   const [dark, setDark] = useState(false);
   const [userr, setUserr] = useState(false);
   const [socket, setSocket] = useState(null);
-  //const [loading, setLoading] = useState(true);
-
   
   useEffect(() => {
     const storedTheme = localStorage.getItem("theme");
@@ -53,9 +51,6 @@ export const DataProvider = ({ children }) => {
       setUserr(false);
       console.log("Fetch error:", error.message);
     }
-    //finally {
-    //setLoading(false);
-  //}
   };
   
   

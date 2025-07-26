@@ -16,9 +16,12 @@ const port=process.env.PORT||4000;
 const app=express()
 const server=http.createServer(app);
 
+//allowedorigins
+const allowedOrigins=["http://localhost:5173","https://real-chat-app-eosin.vercel.app"]
+
 //initialize socket io server
 export const io=new Server(server,{
-    cors:{origin:'http://localhost:5173'}
+    cors:{allowedOrigins},credentials: true,
 })
 
 //store online users
@@ -41,8 +44,6 @@ io.on('connection',(socket)=>{
 
 connectDatabase()
 connectCloudinary()
-//allowedorigins
-const allowedOrigins=["http://localhost:5173","https://real-chat-app-eosin.vercel.app/"]
 
 //middleware
 //app.use(express.json());
@@ -50,7 +51,7 @@ app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
 app.use(cookieParser());
-app.use(cors({origin:allowedOrigins,credentials:true,allowedHeaders: ['Content-Type', 'Authorization']}));
+app.use(cors({origin:allowedOrigins,credentials:true}));
 
 //routes
 app.get('/',(req,res)=>{

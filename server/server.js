@@ -42,7 +42,7 @@ io.on('connection',(socket)=>{
 connectDatabase()
 connectCloudinary()
 //allowedorigins
-const allowedOrigins=["http://localhost:5173"]
+const allowedOrigins=["http://localhost:5173","https://real-chat-app-eosin.vercel.app/"]
 
 //middleware
 //app.use(express.json());

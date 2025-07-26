@@ -7,7 +7,6 @@ const LoginRegister = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [confpassword, setConfPassword] = useState("");
   const [passwords, setPasswords] = useState(true);
   const [state, setState] = useState('login');
   
@@ -102,19 +101,6 @@ const LoginRegister = () => {
                 {passwords ? <EyeOff /> : <Eye />}
               </button>
             </div>
-            {state==='register' && (
-              <div className="relative my-3">
-                <Lock className="w-5 h-6 absolute left-3 top-3 text-gray-400" />
-                <input
-                  type={passwords ? "password" : "text"}
-                  value={confpassword}
-                  onChange={(e) => setConfPassword(e.target.value)}
-                  required
-                  placeholder="confirm password"
-                  className="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all duration-200 text-gray-900"
-                />
-              </div>
-            )}
         
             <button
                 type="submit"

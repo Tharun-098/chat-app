@@ -72,7 +72,7 @@ return (
       <div className="flex-auto overflow-y-auto">
         {filteredContacts?.map((contact)=>(
           <div key={contact._id} onClick={()=>{navigate(`chat/${contact._id}`);setChat(true);setSelectUser(contact);setUnseenMessage((prev)=>({...prev,[contact._id]:0}))}} className="flex justify-between p-4 border-gray-300 border-b-1 dark:border-gray-700">
-            <div className="flex gap-2 items-center flex-3/4">
+            <div className="flex gap-2  flex-3/4">
             <div className="relative">
               <img src={contact.profilePicture || userIcon} className="w-15 h-15 rounded-full" />
               {OnlineUsers.includes(contact._id) && 

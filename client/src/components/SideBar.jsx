@@ -11,11 +11,19 @@ const SideBar = () => {
   const navigate=useNavigate()
   const [search, setSearch] = useState(undefined);
   //const [lastMessage, setlastmessage] = useState({});
-  const filteredContacts = filtered.sort((a, b) => {
+  const filteredContacts = (search
+  ? users.filter(user =>
+      user.username.toLowerCase().includes(search.toLowerCase())
+    )
+  : users
+).sort((a, b) => {
   const aOnline = OnlineUsers[a._id] ? 1 : 0;
   const bOnline = OnlineUsers[b._id] ? 1 : 0;
   return bOnline - aOnline;
 });
+
+console.log(filteredContacts);
+
 
   console.log(filteredContacts)
 //   useEffect(() => {

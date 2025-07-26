@@ -8,6 +8,7 @@ import ChatContext from '../context/ChatContext';
 
 const Chats = () => {
   const scrollEnd=useRef()
+  const containerRef = useRef(null);
   const {setChat,userr,OnlineUsers}=useContext(DataContext);
   const {setUnseenMessage,message,selectUser,setSelectUser,getUserMessage,sendUserMessage}=useContext(ChatContext);
   const [input,setInput]=useState("")
@@ -75,8 +76,13 @@ useEffect(() => {
     }
 }, [selectUser]);
 
+const isUserAtBottom = () => {
+  const container = containerRef.current;
+  return container.scrollHeight - container.scrollTop - container.clientHeight < 100;
+};
+
 useEffect(() => {
-  if (scrollEnd.current && message) {
+  if (scrollEnd.current && isUserAtBottom()) {
     scrollEnd.current.scrollIntoView({ behavior: "smooth" });
   }
 }, [message]);
@@ -91,7 +97,7 @@ useEffect(() => {
         <p className='text-gray-400 text-sm'>{OnlineUsers.includes(selectUser._id)?'online':'offline'}</p>
         </div>
       </div>
-      <div className='flex-1 p-2 dark:bg-gray-950'>
+      <div className='flex-1 p-2 dark:bg-gray-950' ref={containerRef}>
       {message.map((mess, index) => (
   <div key={index}>
     <div className={`flex my-2 ${mess.senderid === userr._id ? 'items-end' : 'items-start'} flex-col`}>

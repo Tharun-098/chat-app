@@ -89,7 +89,7 @@ export const ChatProvider = ({ children }) => {
 
   useEffect(() => {
     getUsers();
-  }, [userr]);
+  }, [OnlineUsers]);
   // Load users + last selected user on mount
   useEffect(() => {
     getUsers();

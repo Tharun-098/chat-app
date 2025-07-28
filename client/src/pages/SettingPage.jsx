@@ -2,6 +2,7 @@ import  { useContext } from 'react'
 import { ArrowLeft, LogOut, Moon, Sun } from "lucide-react"
 import DataContext from '../context/DataContext';
 import { useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
 
 // --- Reusable Components ---
 const SelectOption = ({ value, onChange, options, label, description }) => (
@@ -58,16 +59,16 @@ const SettingPage = () => {
     if(data.success){
       setUserr(undefined)
       setLogin(false)
-      console.log(data.message)
+      toast.success(data.message)
       navigate('/')
       socket.disconnect();
     }
     else{
-      console.log(data.message)
+      toast.error(data.message)
     }
   }
   catch(error){
-    console.log(error.message)
+      toast.error(error.message)
   }
 }
 

@@ -1,4 +1,5 @@
 import { Lock, Mail, User, EyeOff, Eye, MessageCircleCodeIcon } from "lucide-react";
+import toast from "react-hot-toast";
 import { useEffect,useContext, useState } from "react";
 import DataContext from "../context/DataContext";
 import { useNavigate } from "react-router-dom";
@@ -26,18 +27,15 @@ const LoginRegister = () => {
       setUserr(data.user)
       connectSocket(data.user)
       setLogin(true);
-      console.log(data.message)  
+      toast.success(data.message)  
       setName("")
       setEmail("")
       setPassword("")
-      setConfPassword("")
       console.log(userr)
       await fetchUser();
       }
-      else{
-        console.log(data.message)
-      }
     }catch(error){
+      toast.error(error.message)
       console.log(error.message)
     }
 }

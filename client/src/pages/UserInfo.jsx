@@ -13,6 +13,7 @@ import userIcon from '../assets/user-profile-icon-free-vector.jpg'
 import { useContext, useRef, useState } from "react";
 import DataContext from "../context/DataContext";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const UserInfo = () => {
   const [name, setName] = useState("");
@@ -96,11 +97,13 @@ const updateProfile = async (userId) => {
       setEdit(false);
       setUserName("");
       setUserr(data.user)
+      toast.success(data.message)
     } else {
+      toast.error(data.message)
       console.log(data.message);
     }
   } catch (error) {
-    console.log(error.message);
+    toast.error(error.message);
   }
 };
 

@@ -79,17 +79,17 @@ return (
               <div className="bg-green-400 w-3 h-3 absolute rounded-full right-1 bottom-0.5 dark:bg-green-400"></div>
         }
             </div>
-              <div>
+              <div className="flex flex-col justify-center items-center">
                 <h1 className="font-semibold text-md dark:text-white">{contact.username}</h1>
                 {lastMessage[contact._id]?.text ?(
                   <p className="text-gray-400 text-sm">{lastMessage[contact._id].text}</p> 
-                ):(
+                ):lastMessage[contact._id]?.image?(
                   <p className="flex items-center justify-center gap-1"><Image className="w-4 h-4 text-gray-400"/> <span className="text-gray-400 text-sm">photo</span></p>
-                )}
+                ):null}
               </div>
             </div>
             <div className="flex flex-col items-end gap-1">
-                <p className="text-gray-400 text-sm">{formatTimeAgo(lastMessage[contact._id]?.createdAt)}</p>
+                <p className="text-gray-400 relative top-2.5 text-sm">{lastMessage[contact._id]?.createdAt? formatTimeAgo(lastMessage[contact._id]?.createdAt):null}</p>
                 {(unseenmessage[contact._id] ?? 0) > 0 && (
   <p className="text-sm bg-blue-700 text-white w-6 h-6 rounded-full flex justify-center items-center">
     {unseenmessage[contact._id]}

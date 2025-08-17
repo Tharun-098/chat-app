@@ -34,6 +34,9 @@ const LoginRegister = () => {
       console.log(userr)
       await fetchUser();
       }
+      else{
+        toast.error(data.message);
+      }
     }catch(error){
       toast.error(error.message)
       console.log(error.message)
@@ -111,7 +114,7 @@ const LoginRegister = () => {
           <p className="py-3 text-center">
             {state==='register'?'Already have an account?':'create an account?'}
             <span
-              onClick={() =>{state=='register'?setState('login'):setState('register')}}
+              onClick={() => setState(state === 'register' ? 'login' : 'register')}
               className="px-2 cursor-pointer text-indigo-900 font-semibold"
             >
               {state!='register'?'Sign up':'Sign in'}

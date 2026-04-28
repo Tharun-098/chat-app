@@ -11,9 +11,9 @@ export const DataProvider = ({ children }) => {
   const [chat, setChat] = useState(false);
   const [OnlineUsers, setOnlineUsers] = useState([]);
   const [dark, setDark] = useState(false);
-  const [userr, setUserr] = useState(false);
+  const [userr, setUserr] = useState([]);
   const [socket, setSocket] = useState(null);
-  
+  console.log(import.meta.env.VITE_BACKEND_URL)
   useEffect(() => {
     const storedTheme = localStorage.getItem("theme");
     if (storedTheme === "dark") {
@@ -39,7 +39,8 @@ export const DataProvider = ({ children }) => {
 
   const fetchUser = async () => {
     try {
-      const { data } = await axios.get("/user/authUser");
+      const { data } = await axios.get('/user/authUser');
+      console.log("API response:", data); // 👈 add this
       if (data.success) {
         setUserr(data.user);
         connectSocket(data.user);
@@ -78,7 +79,7 @@ export const DataProvider = ({ children }) => {
     })
   }
   
-  
+  console.log(OnlineUsers)
   const toggleTheme = () => {
     setDark(!dark);
   };

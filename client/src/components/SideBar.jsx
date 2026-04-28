@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import DataContext from "../context/DataContext";
-import { Image, Moon, Plus, Search, Settings, Sun } from "lucide-react";
+import { Image, Moon, Plus, Search, Settings, Sun ,MessageSquareIcon} from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import userIcon from '../assets/user-profile-icon-free-vector.jpg'
 import ChatContext from "../context/ChatContext";
@@ -79,19 +79,19 @@ return (
               <div className="bg-green-400 w-3 h-3 absolute rounded-full right-1 bottom-0.5 dark:bg-green-400"></div>
         }
             </div>
-              <div className="flex flex-col justify-center items-center">
+              <div className="flex flex-col justify-center">
                 <h1 className="font-semibold text-md dark:text-white">{contact.username}</h1>
                 {lastMessage[contact._id]?.text ?(
-                  <p className="text-gray-400 text-sm">{lastMessage[contact._id].text}</p> 
+                  <p className="flex items-center gap-1"><MessageSquareIcon className="w-4 h-4 text-gray-400" /> <span className="text-gray-400 text-sm">{lastMessage[contact._id].text}</span></p> 
                 ):lastMessage[contact._id]?.image?(
-                  <p className="flex items-center justify-center gap-1"><Image className="w-4 h-4 text-gray-400"/> <span className="text-gray-400 text-sm">photo</span></p>
+                  <p className="flex items-center gap-1"><Image className="w-4 h-4 text-gray-400"/> <span className="text-gray-400 text-sm">photo</span></p>
                 ):null}
               </div>
             </div>
-            <div className="flex flex-col items-end gap-1">
-                <p className="text-gray-400 relative top-2.5 text-sm">{lastMessage[contact._id]?.createdAt? formatTimeAgo(lastMessage[contact._id]?.createdAt):null}</p>
+            <div className="flex flex-col justify-center items-end gap-1">
+                <p className="text-gray-400 text-sm">{lastMessage[contact._id]?.createdAt? formatTimeAgo(lastMessage[contact._id]?.createdAt):null}</p>
                 {(unseenmessage[contact._id] ?? 0) > 0 && (
-  <p className="text-sm bg-blue-700 text-white w-6 h-6 rounded-full flex justify-center items-center">
+  <p className="text-sm bg-blue-700 text-white w-4 h-4 rounded-full flex justify-center items-center">
     {unseenmessage[contact._id]}
   </p>
 )}
@@ -101,10 +101,10 @@ return (
       </div>
       <div className="p-4 flex justify-between items-center border-t-1 dark:border-gray-700 border-gray-300">
         <div className="flex items-center p-2 hover:bg-gray-200 dark:hover:bg-gray-600 hover:rounded-md flex-1 mr-2">
-          <img src={userr.profilePicture || userIcon} className="w-8 h-8 border-1 border-gray-300 rounded-full"/>
+          <img src={userr?.profilePicture || userIcon} className="w-8 h-8 border-1 border-gray-300 rounded-full"/>
           <div className="text-sm">
             <p className="font-semibold dark:text-white">{userr?.username || 'your name'}</p>
-            <p className='text-gray-400'>{userr.isOnline?'online':'offline'}</p>
+            <p className='text-gray-400'>{userr?.isOnline?'online':'offline'}</p>
           </div>
         </div>
         <Plus onClick={()=>navigate('/userprofile')} className="text-white p-2 rounded-xl w-10 h-10 bg-blue-500 hover:bg-blue-600"/>

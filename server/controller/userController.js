@@ -18,6 +18,7 @@ export const registerUser=async(req,res)=>{
         
         const hashPassword=await bcrypt.hash(password,10); 
         const newUser=await User.create({username,email,password:hashPassword,isOnline:true});
+        console.log(newUser);
         const token = jwt.sign({ id: newUser._id }, process.env.JWT_REFRESH_TOKEN, { expiresIn: '7d' })
         res.cookie('Refreshtoken', token, {
             httpOnly: true,

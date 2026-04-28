@@ -6,7 +6,9 @@ import { io, userSocketMap } from "../server.js";
 export const getAllUsersExcept = async (req, res) => {
   try {
     const userid = req.userId;
+    console.log(userid);
     const filteredUsers = await User.find({ _id: { $ne: userid } }).select('-password');
+    console.log(filteredUsers);
     const unseenmessages = {};
     const promises = filteredUsers.map(async (user) => {
       const messages = await Message.find({
@@ -14,7 +16,7 @@ export const getAllUsersExcept = async (req, res) => {
         receiverid: userid,
         seen: false,
       });
-      if (messages) {
+      if (messages.length>0) {
         unseenmessages[user._id] = messages.length;
       }
     });

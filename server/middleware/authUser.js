@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken"
 const authorization=async(req,res,next)=>{
-
     const token=req.cookies?.Refreshtoken;
+    console.log(token)
     try{
         const decodeToken=jwt.verify(token,process.env.JWT_REFRESH_TOKEN)
         console.log(decodeToken.id)

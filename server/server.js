@@ -42,7 +42,7 @@ io.on('connection',(socket)=>{
     })
 })
 
-connectDatabase()
+await connectDatabase()
 connectCloudinary()
 
 //middleware

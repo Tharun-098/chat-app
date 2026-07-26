@@ -60,7 +60,7 @@ return (
               type="text"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              placeholder="search messages"
+              placeholder="search users"
               className="focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all duration-200 w-full bg-gray-100 outline-0 border-1 dark:text-gray-400 border-gray-300 dark:bg-gray-700 dark:border-gray-600 py-2 pl-8 rounded-md"
             />
           </div>

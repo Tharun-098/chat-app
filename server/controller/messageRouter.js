@@ -81,7 +81,7 @@ export const readMessage = async (req, res) => {
 
 export const sendMessages = async (req, res) => {
   try {
-    const { text, image } = req.body;
+    const { text, image,sendTime} = req.body;
     const receiverid = req.params.id;
     const senderid = req.userId;
 
@@ -104,7 +104,7 @@ export const sendMessages = async (req, res) => {
     // Emit to receiver if online
     const receiverSocketId = userSocketMap[receiverid];
     if (receiverSocketId) {
-      io.to(receiverSocketId).emit("newmessage", newmessage);
+      io.to(receiverSocketId).emit("newmessage", newmessage,sendTime);
     }
 
     return res.json({ success: true, newmessage });

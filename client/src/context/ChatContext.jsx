@@ -54,7 +54,9 @@ export const ChatProvider = ({ children }) => {
 
   const sendUserMessage = async (messageData) => {
     try {
-      const { data } = await axios.post(`/message/send/${selectUser._id}`, messageData);
+      const sendTime=Date.now();
+      console.log("sendTime:",sendTime);
+      const { data } = await axios.post(`/message/send/${selectUser._id}`, { ...messageData, sendTime });
       if (data.success) {
         setMessage((prev) => [...prev, data.newmessage]);
       }
@@ -67,9 +69,13 @@ export const ChatProvider = ({ children }) => {
   useEffect(() => {
     if (!socket) return;
 
-    const handleNewMessage = async (newMessage) => {
+    const handleNewMessage = async (newMessage, sendTime) => {
       const currentUser = selectUserRef.current;
+      const receiveTime = Date.now();
 
+  const latency = receiveTime - sendTime;
+
+  console.log("One-to-one message latency:", latency, "ms");
       if (currentUser && newMessage.senderid === currentUser._id) {
         newMessage.seen = true;
         setMessage((prev) => [...prev, newMessage]);

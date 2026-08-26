@@ -16,8 +16,8 @@ const SideBar = () => {
     )
   : users
 ).sort((a, b) => {
-  const aOnline = OnlineUsers[a._id] ? 1 : 0;
-  const bOnline = OnlineUsers[b._id] ? 1 : 0;
+  const aOnline = OnlineUsers.includes(a._id) ? 1 : 0;
+  const bOnline = OnlineUsers.includes(b._id) ? 1 : 0;
   return bOnline - aOnline;
 });
 

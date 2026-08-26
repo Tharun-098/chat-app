@@ -70,11 +70,11 @@ export const ChatProvider = ({ children }) => {
     if (!socket) return;
 
     const handleNewMessage = async (newMessage, sendTime) => {
+      
       const currentUser = selectUserRef.current;
       const receiveTime = Date.now();
-
+        
   const latency = receiveTime - sendTime;
-
   console.log("One-to-one message latency:", latency, "ms");
       if (currentUser && newMessage.senderid === currentUser._id) {
         newMessage.seen = true;

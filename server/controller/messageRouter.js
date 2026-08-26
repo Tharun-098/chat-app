@@ -84,9 +84,9 @@ export const sendMessages = async (req, res) => {
     const { text, image,sendTime} = req.body;
     const receiverid = req.params.id;
     const senderid = req.userId;
-
+    console.log(sendTime);
     let imgurl;
-
+    
     // Upload image to Cloudinary if provided
     if (image) {
       const result = await cloudinary.uploader.upload(image);
